@@ -1,7 +1,12 @@
 export interface CellpropType {
     done: boolean,
     value: number,
-    data: any,
+    // days : number,
+    data: {
+        date : number,
+        month : number,
+        year : number,
+    },
     fullTime: number,
 }
 

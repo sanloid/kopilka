@@ -1,21 +1,25 @@
-import React from 'react'
-import { CellsPlan } from '../types/CellType';
-import Cell from './Cell'
+import React from "react";
+import { CellsPlan } from "../types/CellType";
+import Cell from "./Cell";
 
 export default function ListofMoney(props: CellsPlan) {
   let totalSum = 0;
   return (
-    <div className='cells'>
-      {props.planName}
-      <br />
-      {[...Array(props.cells.length)].map((_, i) => {
-        totalSum += props.cells[i].value
-        return (
-          <Cell {...props.cells[i]} key={i}/>
-        )
-      }
+    <>
+      {props.cells ? (
+        <>
+          {props.planName}
+          <div className="cells">
+            {[...Array(props.cells.length)].map((_, i) => {
+              totalSum += props.cells[i].value;
+              return <Cell {...props.cells[i]} key={i} />;
+            })}
+          </div>
+          Итого вы накопите: {totalSum}
+        </>
+      ) : (
+        <></>
       )}
-      Итого вы накопите:  {totalSum}
-    </div>
-  )
+    </>
+  );
 }
