@@ -21,9 +21,7 @@
   justify-content: center;
 }
 
-.cellDate{
-
-}
+.cellDate {}
 
 .cellDone {
   justify-content: center;
@@ -44,11 +42,20 @@
   border-radius: 10% 30% 50% 70%;
 }
 
+
+.cellNotInPlan {
+  /* padding: 50px; */
+  background-color: rgba(90, 88, 88, 0.562);
+  max-height: 50px;
+  max-width: 50px;
+  border-radius: 10% 30% 50% 70%;
+}
+
 .calendar {
   /* grid-template-rows: 1fr 1fr; */
 }
 
-.controllpanel{
+.controllpanel {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }
@@ -59,18 +66,18 @@
   grid-template-columns: repeat(7, 1fr);
 }
 
-.datesline{
+.datesline {
   display: grid;
   gap: 50px;
   grid-template-columns: repeat(7, 1fr);
 }
 
-.dayOfWeek{
+.dayOfWeek {
   width: 150px;
 }
 
 
-.NavBar{
+.NavBar {
   display: flex;
   text-align: center;
   gap: 20px;
