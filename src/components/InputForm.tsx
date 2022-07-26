@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { useAppDispatch } from "../app/hooks";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { addState } from "../slices/ListOfMoneyPropsSlice";
-import { CellpropType } from "../types/CellType";
+import { CellpropType, CellType } from "../types/CellType";
 import { InputFormPropType } from "../types/InputFormType";
 import { ListOfMoneypropType } from "../types/ListofMoneyType";
 
@@ -23,6 +23,7 @@ export default function InputForm() {
   });
   const [planeIsCreated, setPlan] = useState(false);
   const dispatch = useAppDispatch();
+  const select = useAppSelector(state=> state.CellsState);
 
   function createCellArray(props: ListOfMoneypropType) {
     let arr = new Array<CellpropType>(props.days);
@@ -31,6 +32,8 @@ export default function InputForm() {
       let tCellDate = new Date(cd);
       cd += props.interval * 24 * 60 * 60 * 1000;
       arr[i] = {
+        planIndex : select.plans.length,
+        type: CellType.notdone,
         done: false,
         value: props.start + i * props.increment,
         data: {

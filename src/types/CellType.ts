@@ -1,6 +1,14 @@
+export enum CellType{
+    done = 'cellDone',
+    notdone = 'cellNotDone',
+    notinplan = 'cellNotInPlan',
+}
+
 export interface CellpropType {
+    planIndex: number,
     done: boolean,
     value: number,
+    type : CellType,
     // days : number,
     data: {
         date : number,

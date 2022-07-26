@@ -1,7 +1,7 @@
 import { type } from "os";
 import React, { useEffect, useState } from "react";
 import { useAppSelector } from "../app/hooks";
-import { CellpropType } from "../types/CellType";
+import { CellpropType, CellType } from "../types/CellType";
 import Cell from "./Cell";
 import NavBar from "./NavBar";
 
@@ -46,14 +46,23 @@ export default function Calendar() {
   let weeks = 5;
   let arr = getArrayOfMonth();
 
+  interface checkInRes {
+    isin: boolean;
+    value: number;
+    type : CellType;
+  }
 
-  function checkIn(a : any, arr : CellpropType[]) : boolean{
-    for(let i = 0; i < arr.length; i++){
-        // console.log(a, "  ", arr[i].data);
-        if(arr[i].data.date === a.date && arr[i].data.month === a.month && arr[i].data.year === a.year)
-            return true;
+  function checkIn(a: any, arr: CellpropType[]): checkInRes {
+    for (let i = 0; i < arr.length; i++) {
+      // console.log(a, "  ", arr[i].data);
+      if (
+        arr[i].data.date === a.date &&
+        arr[i].data.month === a.month &&
+        arr[i].data.year === a.year
+      )
+        return { isin: true, value: arr[i].value, type : arr[i].type};
     }
-    return false; 
+    return { isin: false, value: 0, type : CellType.notinplan };
   }
 
   function nextMonth() {
@@ -205,11 +214,14 @@ export default function Calendar() {
           return (
             <div className="datesline" key={row}>
               {[...Array(7)].map((_, col) => {
+                let res = checkIn(arr[row][col], select[selectedPlan].cells);
                 return (
                   <div key={col}>
                     <Cell
-                      done={select? checkIn(arr[row][col], select[selectedPlan].cells) : false}
-                      value={0}
+                      planIndex={selectedPlan}
+                      type = {res.type}
+                      done={res.isin}
+                      value={res.value}
                       data={arr[row][col]}
                       fullTime={0}
                     />
